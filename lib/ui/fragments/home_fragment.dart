@@ -32,7 +32,7 @@ class _HomeFragmentState extends State<HomeFragment> {
           list.add(m);
         }
       }
-      print(list.length);
+      
     } catch (e) {
       return null;
     }
@@ -103,7 +103,9 @@ class _HomeFragmentState extends State<HomeFragment> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              ContentHome()
+              Container(
+                height: 200,
+                child: ContentHome())
             ],
           ),
         ),
