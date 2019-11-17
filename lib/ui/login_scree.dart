@@ -43,77 +43,109 @@ class _LoginPageState extends State<LoginPage>
     return Scaffold(
       backgroundColor: Color(0xff7F88E4),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         child: Container(
           width: _width,
           height: _height,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 50.0),
               Center(
-                child: DelayedAnimation(
-                  child: Text("Welcome back Mate,\nLogin Here!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Roboto',
-                        fontSize: 35.0,
-                        fontWeight: FontWeight.normal,
-                      )),
-                  delay: 300 + _delayed,
-                ),
-              ),
-              DelayedAnimation(
-                delay: _delayed + 200,
-                              child: Container(
+                child: Container(
                   width: _width,
-                  child: Stack(children: <Widget>[
-                    Positioned(
-                      child: Container(
-                        height: 280,
-                        width: _width - 80,
-                        margin: EdgeInsets.only(top: 80.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(500.0),
-                                bottomRight: Radius.circular(500.0))),
-                        child: fields(),
-                      ),
-                    ),
-                    Positioned(
-                      left: 290,
-                      bottom: 110,
-                      child: GestureDetector(
-                          onTapDown: _onTapDown,
-                          onTapUp: _onTapUp,
-                          onTap: () {
-                            if (_formKey.currentState.validate()) {}
-                          },
-                          child: Transform.scale(
-                              scale: scale, child: _animatedButton)),
-                    ),
-                  ]),
+                  height: 160,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.only(bottomLeft: Radius.circular(80.0))),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      Positioned(
+                          left: 20,
+                          top: 20,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacementNamed(
+                                  context, '/signup');
+                            },
+                            child: Icon(
+                              Icons.close,
+                              size: 35,
+                              color: Color(0xff7F88E4),
+                            ),
+                          )),
+                      Positioned(
+                        left: 20,
+                        top: 60,
+                        width: _width,
+                        child: Center(
+                            child: Text("Welcome back Mate,\nLogin Here! ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(0xff7F88E4),
+                                    fontSize: 35,
+                                    fontFamily: 'Roboto',
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.bold))),
+                      )
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 80.0,),
+              SizedBox(
+                height: 60.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Material(
+                  borderRadius: BorderRadius.circular(10),
+                  elevation: 30.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: fields(),
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                height: 50.0,
+              ),
               Center(
                 child: DelayedAnimation(
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, '/signup');
-                    },
-                    child: Text(
-                      "New User? SignUp".toUpperCase(),
-                      style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.white,
-                          fontSize: 17.0),
-                    ),
-                  ),
-                  delay: _delayed + 300,
+                      onTapDown: _onTapDown,
+                      onTapUp: _onTapUp,
+                      onTap: () {
+                        if (_formKey.currentState.validate()) {
+                          Navigator.pushReplacementNamed(context, '/home');
+                        }
+                      },
+                      child: Transform.scale(
+                          scale: scale, child: _animatedButton)),
+                  delay: 300,
                 ),
               ),
+              // Center(
+              //   child: DelayedAnimation(
+              //     child: GestureDetector(
+              //       onTap: () {
+              //         Navigator.pushReplacementNamed(context, '/signup');
+              //       },
+              //       child: Text(
+              //         "New User? SignUp".toUpperCase(),
+              //         style: TextStyle(
+              //             fontFamily: 'Roboto',
+              //             color: Colors.white,
+              //             fontSize: 17.0),
+              //       ),
+              //     ),
+              //     delay: _delayed + 300,
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -126,14 +158,18 @@ class _LoginPageState extends State<LoginPage>
         key: _formKey,
         child: Column(
           children: <Widget>[
+            SizedBox(
+              height: 20.0,
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 70.0, left: 10, right: 50.0),
+              padding:
+                  const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
               child: TextFormField(
                 controller: c_email,
                 validator: (input) {
                   if (input.trim().isEmpty) {
                     return 'Provide an email';
-                  }else if(!input.trim().contains("@")){
+                  } else if (!input.trim().contains("@")) {
                     return "Invalid email";
                   }
                 },
@@ -152,7 +188,8 @@ class _LoginPageState extends State<LoginPage>
               height: 20.0,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 50.0),
+              padding: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 5.0, bottom: 20),
               child: TextFormField(
                 controller: c_password,
                 keyboardType: TextInputType.text,
@@ -198,29 +235,22 @@ class _LoginPageState extends State<LoginPage>
   }
 
   Widget get _animatedButton => Material(
-        child: ClipOval(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                colors: [
-                  Color(0xff7F88E4),
-                  Color(0xffD0D4F5),
-                ],
-              ),
-            ),
-            child: CircleAvatar(
-              radius: 35,
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-                size: 40,
-              ),
-            ),
+        child: Container(
+          height: 60.0,
+          width: 280.0,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(40.0))),
+          child: Center(
+            child: Text("Login",
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 20.0,
+                    color: Color(0xff7F88E4))),
           ),
         ),
-        shape: CircleBorder(),
+        elevation: 25.0,
+        borderRadius: BorderRadius.all(Radius.circular(40.0)),
       );
 
   void _onTapDown(TapDownDetails details) {
