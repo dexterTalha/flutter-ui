@@ -129,23 +129,26 @@ class _LoginPageState extends State<LoginPage>
                   delay: 300,
                 ),
               ),
-              // Center(
-              //   child: DelayedAnimation(
-              //     child: GestureDetector(
-              //       onTap: () {
-              //         Navigator.pushReplacementNamed(context, '/signup');
-              //       },
-              //       child: Text(
-              //         "New User? SignUp".toUpperCase(),
-              //         style: TextStyle(
-              //             fontFamily: 'Roboto',
-              //             color: Colors.white,
-              //             fontSize: 17.0),
-              //       ),
-              //     ),
-              //     delay: _delayed + 300,
-              //   ),
-              // ),
+              SizedBox(
+                height: 50.0,
+              ),
+              Center(
+                child: DelayedAnimation(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/signup');
+                    },
+                    child: Text(
+                      "New User? SignUp".toUpperCase(),
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color: Colors.white,
+                          fontSize: 17.0),
+                    ),
+                  ),
+                  delay: _delayed + 300,
+                ),
+              ),
             ],
           ),
         ),
