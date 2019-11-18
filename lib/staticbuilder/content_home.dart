@@ -38,14 +38,7 @@ class ContentHome extends StatelessWidget {
         list.add(p);
         
       }
-      // for (var item in res) {
-      //   Product p = Product(
-      //       id: item['id'],
-      //       title: item['title'],
-      //       image: item['image'],
-      //       price: item['price']);
-      //   list.add(p);
-      // }
+      
       print(list.length);
       return list;
     } catch (e) {
@@ -55,51 +48,54 @@ class ContentHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(       
-      future: _getProducts(),
-      builder: (context, snap) {
-        if(snap.hasData == null){
-          return Center(
-            child: Container(
-              height: 20.0,
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }else{
-        return ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: snap.data.length,
-          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          itemBuilder: (context, index) {
-            Product p = snap.data[index];
-            return Container(
-              height: 180.0,
-              width: 180.0,
-              child: Column(
-                children: <Widget>[
-                  Card(
-                    elevation: 12.0,
-
-                    child: Stack(
-                      overflow: Overflow.visible,
-                      children: <Widget>[
-                        Image.network("https://puranabazzar.com/dashboard/{$p.image}"),
-                        Positioned(
-                          right: 10,
-                          bottom: 10,
-                          child: Icon(Icons.favorite),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(p.title)
-                ],
-              ),
-            );
-          },
-        );
-        }
-      }
-    );
+    return Container();
   }
 }
+
+
+// FutureBuilder(       
+//       future: _getProducts(),
+//       builder: (context, snap) {
+//         if(snap.hasData == null){
+//           return Center(
+//             child: Container(
+//               height: 20.0,
+//               child: CircularProgressIndicator(),
+//             ),
+//           );
+//         }else{
+//         return ListView.builder(
+//           scrollDirection: Axis.horizontal,
+//           itemCount: snap.data.length,
+//           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+//           itemBuilder: (context, index) {
+//             Product p = snap.data[index];
+//             return Container(
+//               height: 180.0,
+//               width: 180.0,
+//               child: Column(
+//                 children: <Widget>[
+//                   Card(
+//                     elevation: 12.0,
+
+//                     child: Stack(
+//                       overflow: Overflow.visible,
+//                       children: <Widget>[
+//                         Image.network("https://puranabazzar.com/dashboard/{$p.image}"),
+//                         Positioned(
+//                           right: 10,
+//                           bottom: 10,
+//                           child: Icon(Icons.favorite),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                   Text(p.title)
+//                 ],
+//               ),
+//             );
+//           },
+//         );
+//         }
+//       }
+//     );
