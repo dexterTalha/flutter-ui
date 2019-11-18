@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:servicer/animation/delay_animation.dart';
+import 'package:servicer/staticbuilder/top_bar.dart';
 
 class UploadImageScreen extends StatefulWidget {
   @override
@@ -51,45 +52,14 @@ class _UploadImageScreenState extends State<UploadImageScreen> with SingleTicker
           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           child: Column(
             children: <Widget>[
-              Container(
-                width: _width,
-                height: 160,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(80.0))),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                    Positioned(
-                        left: 20,
-                        top: 20,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacementNamed(context, '/signup');
-                          },
-                          child: Icon(
-                            Icons.close,
-                            size: 35,
-                            color: Color(0xff7F88E4),
-                          ),
-                        )),
-                    Positioned(
-                      left: 20,
-                      top: 80,
-                      width: _width,
-                      child: Center(
-                          child: Text("Profile Picture!",
-                              style: TextStyle(
-                                  color: Color(0xff7F88E4),
-                                  fontSize: 35,
-                                  fontFamily: 'Roboto',
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold))),
-                    )
-                  ],
-                ),
-              ),
+              ScreenTopBar(
+          callback: (){
+
+          },
+          title: "Profile Picture! ",
+          height: 160,
+          width: _width,
+        ),
               SizedBox(
                 height: 50.0,
               ),

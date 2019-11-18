@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:servicer/animation/delay_animation.dart';
+import 'package:servicer/staticbuilder/top_bar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -51,48 +52,12 @@ class _LoginPageState extends State<LoginPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Center(
-                child: Container(
-                  width: _width,
-                  height: 160,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius:
-                          BorderRadius.only(bottomLeft: Radius.circular(80.0))),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: <Widget>[
-                      Positioned(
-                          left: 20,
-                          top: 20,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, '/signup');
-                            },
-                            child: Icon(
-                              Icons.close,
-                              size: 35,
-                              color: Color(0xff7F88E4),
-                            ),
-                          )),
-                      Positioned(
-                        left: 20,
-                        top: 60,
-                        width: _width,
-                        child: Center(
-                            child: Text("Welcome back Mate,\nLogin Here! ",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color(0xff7F88E4),
-                                    fontSize: 35,
-                                    fontFamily: 'Roboto',
-                                    fontStyle: FontStyle.italic,
-                                    fontWeight: FontWeight.bold))),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                child: ScreenTopBar(
+                callback: () {},
+                title: "Welcome back Mate,\nLogin Here! ",
+                height: 160,
+                width: _width,
+              )),
               SizedBox(
                 height: 60.0,
               ),
@@ -110,7 +75,6 @@ class _LoginPageState extends State<LoginPage>
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 50.0,
               ),
