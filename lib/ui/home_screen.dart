@@ -66,7 +66,9 @@ class _HomeScreenState extends State<HomeScreen>
                 padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[Icon(Icons.add_a_photo), Text("Sell")],
+                  children: <Widget>[Icon(Icons.add_a_photo), Text("Sell",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
+                  )],
                 ),
               ),
             ),
