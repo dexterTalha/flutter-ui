@@ -105,7 +105,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               ),
               Container(
                 height: 200,
-                child: ContentHome())
+                child: ContentHome(url:"https://puranabazzar.com/api/product_list.php"))
             ],
           ),
         ),
