@@ -44,14 +44,32 @@ class _HomeScreenState extends State<HomeScreen>
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        floatingActionButton: FloatingActionButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          onPressed: () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[Icon(Icons.add_a_photo), Text("Sell")],
+        floatingActionButton: RotatedBox(
+          quarterTurns: 3,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xff7F88E4),
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            margin: EdgeInsets.only(left: 55),
+            height: 50,
+            width: 120,
+            child: FloatingActionButton(
+              elevation: 8,
+              backgroundColor: Color(0xff7F88E4),
+              splashColor: Color(0xffD0D4F5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[Icon(Icons.add_a_photo), Text("Sell")],
+                ),
+              ),
+            ),
           ),
         ),
         body: SafeArea(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:servicer/modal/product_modal.dart';
@@ -29,7 +30,8 @@ class ContentHome extends StatelessWidget {
       var response = await http.get(url);
       var data = json.decode(response.body);
       var res = data["products"] as List;
-      print(res);
+      //print(res);
+      int len = (res.length <= 10)?res.length:10;
       for (var i = 0; i < res.length; i++) {
         Product p = Product(
           id: res[i]['id'],
@@ -62,9 +64,8 @@ class ContentHome extends StatelessWidget {
           );
         } else if (snap.hasData) {
           return ListView.builder(
-            physics: BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()
-            ),
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             scrollDirection: Axis.horizontal,
             itemCount: snap.data.length,
             itemBuilder: (context, index) {
@@ -85,11 +86,34 @@ class ContentHome extends StatelessWidget {
                           ),
                           height: 130.0,
                           width: 150.0,
-                          child: Image.network(
-                            "https://puranabazzar.com/dashboard/" + p.image,
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
+                          child: Center(
+                            child: CachedNetworkImage(
+                              fit: BoxFit.fitHeight,
+                              useOldImageOnUrlChange: true,
+                              imageUrl: "https://puranabazzar.com/dashboard/" +
+                                  p.image,
+                              fadeInCurve: Curves.easeInExpo,
+                              height: 120,
+                              width: 140,
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                ),
+                              ),
+                              fadeInDuration: Duration(milliseconds: 300),
+                              alignment: Alignment.center,
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(),
+                              errorWidget: (context, url, error) => Icon(
+                                  Icons.error,
+                                  color: Colors.redAccent,
+                                  size: 30),
+                            ),
                           ),
                         ),
                       ),
@@ -99,24 +123,28 @@ class ContentHome extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            p.title,
-                            maxLines: 1,
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
+                          Container(
+                            width: 110,
+                            child: Text(
+                              p.title.toUpperCase(),
+                              maxLines: 1,
+                              style: TextStyle(
+                                wordSpacing: 1.5,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                            ),
                           ),
                           GestureDetector(
-                            onTap:(){
-
-                            },
-                            child: Icon(Icons.favorite_border, size: 25, color: Colors.red,
-                            )
-                          )
+                              onTap: () {},
+                              child: Icon(
+                                Icons.favorite_border,
+                                size: 25,
+                                color: Colors.red,
+                              ))
                         ],
                       ),
                     ],
